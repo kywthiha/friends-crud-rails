@@ -1,6 +1,7 @@
 class FriendsController < ApplicationController
   before_action :set_friend, only: %i[ show edit update destroy ]
 
+
   # GET /friends or /friends.json
   def index
     @friends = Friend.all
@@ -21,8 +22,12 @@ class FriendsController < ApplicationController
 
   # POST /friends or /friends.json
   def create
-    logger.debug "friend dd #{friend_params}"
-    @friend = Friend.new(friend_params)
+    if user_signed_in?
+      @friend = current_user.friends.create(friend_params)
+    else
+      @friend = Friend.new(friend_params)
+    end
+
 
     respond_to do |format|
       if @friend.save
