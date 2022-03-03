@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_03_02_125528) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "friends", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -18,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_02_125528) do
     t.string "twitter"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_friends_on_user_id"
   end
 

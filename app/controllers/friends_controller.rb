@@ -5,7 +5,7 @@ class FriendsController < ApplicationController
 
   # GET /friends or /friends.json
   def index
-    @friends = Friend.eager_load(:user).search(params[:search]).paginate(page: params[:page])
+    @friends = Friend.eager_load(:user).search(params[:search]).paginate(page: params[:page],per_page:10)
   end
 
   # GET /friends/1 or /friends/1.json
