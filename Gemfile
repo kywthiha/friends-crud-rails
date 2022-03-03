@@ -44,6 +44,8 @@ gem "bootsnap", require: false
 
 gem 'devise', '~> 4.8', '>= 4.8.1'
 
+gem 'will_paginate', '~> 3.3'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

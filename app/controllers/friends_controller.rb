@@ -1,10 +1,11 @@
 class FriendsController < ApplicationController
   before_action :set_friend, only: %i[ show edit update destroy ]
+  prepend_before_action :authenticate_user!, only: [:show]
 
 
   # GET /friends or /friends.json
   def index
-    @friends = Friend.all
+    @friends = Friend.eager_load(:user).search(params[:search]).paginate(page: params[:page])
   end
 
   # GET /friends/1 or /friends/1.json
@@ -42,8 +43,10 @@ class FriendsController < ApplicationController
 
   # PATCH/PUT /friends/1 or /friends/1.json
   def update
+    friend_update_params = friend_params
+    friend_update_params[:user_id] = current_user&.id
     respond_to do |format|
-      if @friend.update(friend_params)
+      if @friend.update(friend_update_params)
         format.html { redirect_to friend_url(@friend), notice: "Friend was successfully updated." }
         format.json { render :show, status: :ok, location: @friend }
       else

@@ -25,6 +25,9 @@
     <%= friend.twitter %>
   </td>
   <td>
+    <%= friend&.user&.email %>
+  </td>
+  <td>
     <div class="row ">
     <%= link_to "Edit", edit_friend_path(friend),class:'col align-self-center' %> 
     <div class="col align-self-center">
