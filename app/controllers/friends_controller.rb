@@ -1,6 +1,6 @@
 class FriendsController < ApplicationController
   before_action :set_friend, only: %i[ show edit update destroy ]
-  prepend_before_action :authenticate_user!, only: [:show]
+  prepend_before_action :authenticate_user!, only: [:edit,:update,:destroy,:create,:new]
 
 
   # GET /friends or /friends.json
